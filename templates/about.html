@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default('en') }}">
+<html lang="{{ site.lang | default('en') }}" data-theme="{{ site.default_theme | default('dark') }}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,57 +9,129 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap">
+<script>
+  // Runs before paint so a stored theme never flashes the wrong one.
+  try {
+    var t = localStorage.getItem("cyberpunk-theme");
+    if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
 <style>
+  /* ---- seeds: change these two to recolor the whole page ---- */
   :root {
-    --cy: {{ site.accent | default('#62e8e0') }};        /* primary neon  */
-    --mg: {{ site.accent_2 | default('#ff4a9e') }};      /* counter neon  */
-    --ink: #0d0f18;
-    --fg: #dfe6ef;
-    --fg-bright: #f2f6fb;
-    --fg-dim: #8b9bb0;
-    --fg-faint: #4a5568;
-    --hair: color-mix(in srgb, var(--cy) 22%, transparent);
+    --seed-cy: {{ site.accent | default('#62e8e0') }};    /* primary neon  */
+    --seed-mg: {{ site.accent_2 | default('#ff4a9e') }};  /* counter neon  */
     --mono: 'JetBrains Mono', ui-monospace, monospace;
     --gutter: clamp(20px, 5vw, 72px);
     --band: clamp(44px, 7vh, 88px);
   }
+
+  /* ---- theme: dark ---- */
+  :root {
+    --ink: {{ site.ground | default('#0d0f18') }};
+    --mid: color-mix(in oklab, var(--ink) 88%, #f2f6fb);
+    --cy: var(--seed-cy);
+    --mg: var(--seed-mg);
+    --cy-hi: color-mix(in oklab, var(--cy) 55%, #ffffff);
+    --fg: #dfe6ef;
+    --fg-bright: #f2f6fb;
+    --fg-dim: #8b9bb0;
+    --fg-faint: #4a5568;
+    --scan: rgba(255,255,255,0.035);
+    --hair: color-mix(in srgb, var(--cy) 22%, transparent);
+    --cy-28: color-mix(in srgb, var(--cy) 28%, transparent);
+    --cy-26: color-mix(in srgb, var(--cy) 26%, transparent);
+    --cy-50: color-mix(in srgb, var(--cy) 50%, transparent);
+    --cy-07: color-mix(in srgb, var(--cy) 7%, transparent);
+    --cy-05: color-mix(in srgb, var(--cy) 5%, transparent);
+    --mg-50: color-mix(in srgb, var(--mg) 50%, transparent);
+    --mg-07: color-mix(in srgb, var(--mg) 7%, transparent);
+    --cy-16: color-mix(in srgb, var(--cy) 16%, transparent);
+    --mg-16: color-mix(in srgb, var(--mg) 16%, transparent);
+    --cy-45: color-mix(in srgb, var(--cy) 45%, transparent);
+    --cy-70: color-mix(in srgb, var(--cy) 70%, transparent);
+    --split: 3px 0 0 color-mix(in srgb, var(--mg) 35%, transparent), -3px 0 0 color-mix(in srgb, var(--cy) 35%, transparent);
+    --cy-glow: 0 0 14px color-mix(in srgb, var(--cy) 75%, transparent), 0 0 44px color-mix(in srgb, var(--cy) 40%, transparent);
+    --dot-ring: 0 0 8px var(--mg), 0 0 20px color-mix(in srgb, var(--mg) 70%, transparent);
+  }
+
+  /* ---- theme: light ----
+     On a pale ground the neons darken hard to stay legible, and the glow that
+     carries this look only exists on a dark field, so it collapses instead. */
+  :root[data-theme="light"] {
+    --ink: {{ site.light_ground | default('#eceef2') }};
+    --mid: color-mix(in oklab, var(--ink) 96%, #14161f);
+    --cy: color-mix(in oklab, var(--seed-cy) 62%, #08343a);
+    --mg: color-mix(in oklab, var(--seed-mg) 68%, #3d0524);
+    --cy-hi: color-mix(in oklab, var(--cy) 80%, #08343a);
+    --fg: #1b2029;
+    --fg-bright: #0c0f16;
+    --fg-dim: #59636f;
+    --fg-faint: #8d97a3;
+    --scan: rgba(12,15,22,0.045);
+    --hair: color-mix(in srgb, var(--cy) 30%, transparent);
+    --cy-28: color-mix(in srgb, var(--cy) 34%, transparent);
+    --cy-26: color-mix(in srgb, var(--cy) 32%, transparent);
+    --cy-50: color-mix(in srgb, var(--cy) 55%, transparent);
+    --cy-07: color-mix(in srgb, var(--cy) 9%, transparent);
+    --cy-05: color-mix(in srgb, var(--cy) 7%, transparent);
+    --mg-50: color-mix(in srgb, var(--mg) 55%, transparent);
+    --mg-07: color-mix(in srgb, var(--mg) 9%, transparent);
+    --cy-16: color-mix(in srgb, var(--cy) 4%, transparent);
+    --mg-16: color-mix(in srgb, var(--mg) 4%, transparent);
+    --cy-45: color-mix(in srgb, var(--cy) 11%, transparent);
+    --cy-70: color-mix(in srgb, var(--cy) 18%, transparent);
+    --split: 2px 0 0 color-mix(in srgb, var(--mg) 22%, transparent), -2px 0 0 color-mix(in srgb, var(--cy) 22%, transparent);
+    --cy-glow: none;
+    --dot-ring: 0 0 0 3px color-mix(in srgb, var(--mg) 20%, transparent);
+  }
+
   html { scroll-behavior: smooth; overflow-x: clip; }
   html, body { margin: 0; padding: 0; background: var(--ink); }
   a { color: var(--cy); text-decoration: none; }
-  a:hover { color: color-mix(in srgb, var(--cy) 55%, #ffffff); }
+  a:hover { color: var(--cy-hi); }
   :focus-visible { outline: 2px solid var(--cy); outline-offset: 2px; }
   ::selection { background: color-mix(in srgb, var(--cy) 35%, transparent); }
 
   .page {
     position: relative; min-height: 100vh; color: var(--fg); font-family: var(--font-body);
     background:
-      linear-gradient(180deg, var(--ink), #12141f 60%, var(--ink)),
-      radial-gradient(70% 40% at 12% 0%, color-mix(in srgb, var(--cy) 16%, transparent), transparent 70%),
-      radial-gradient(60% 40% at 92% 88%, color-mix(in srgb, var(--mg) 16%, transparent), transparent 70%);
+      linear-gradient(180deg, var(--ink), var(--mid) 60%, var(--ink)),
+      radial-gradient(70% 40% at 12% 0%, var(--cy-16), transparent 70%),
+      radial-gradient(60% 40% at 92% 88%, var(--mg-16), transparent 70%);
   }
-  .scan { position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(180deg, rgba(255,255,255,0.035) 0 1px, transparent 1px 3px); }
+  .scan { position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(180deg, var(--scan) 0 1px, transparent 1px 3px); }
 
   .top {
     position: sticky; top: 0; z-index: 5; display: flex; align-items: center; justify-content: space-between;
     gap: var(--space-8); padding: var(--space-4) var(--gutter); font-family: var(--mono);
     background: color-mix(in srgb, var(--ink) 82%, transparent); backdrop-filter: blur(10px);
-    border-bottom: 1px solid color-mix(in srgb, var(--cy) 28%, transparent);
+    border-bottom: 1px solid var(--cy-28);
   }
   .brand { display: flex; align-items: center; gap: var(--space-3); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--cy); }
-  .brand::before { content: ""; width: 8px; height: 8px; background: var(--mg); box-shadow: 0 0 8px var(--mg), 0 0 20px color-mix(in srgb, var(--mg) 70%, transparent); }
+  .brand::before { content: ""; width: 8px; height: 8px; background: var(--mg); box-shadow: var(--dot-ring); }
   .brand i { font-style: normal; color: var(--fg-faint); }
-  .top nav { display: flex; gap: var(--space-6); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; }
+  .top nav { display: flex; align-items: center; gap: var(--space-6); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; }
   .top nav a { color: var(--fg-dim); }
+  .theme-btn {
+    font: inherit; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--mg); background: none; border: 1px solid var(--mg-50); padding: 4px 9px; cursor: pointer;
+    clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);
+  }
+  .theme-btn:hover { background: var(--mg-07); }
+  .theme-btn .to-dark { display: none; }
+  :root[data-theme="light"] .theme-btn .to-dark { display: inline; }
+  :root[data-theme="light"] .theme-btn .to-light { display: none; }
   .body { position: relative; padding: 0 var(--gutter) 140px; }
 
   .hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.4fr); gap: clamp(24px, 5vw, 64px); align-items: end; padding: clamp(64px, 11vh, 140px) 0 var(--band); border-bottom: 1px solid var(--hair); }
   .kicker { margin: 0 0 var(--space-6); font-family: var(--mono); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--mg); }
-  h1 { margin: 0; font-family: var(--font-heading); font-weight: 500; font-size: clamp(38px, 7vw, 88px); line-height: 0.96; letter-spacing: -0.035em; max-width: 15em; color: var(--fg-bright); text-shadow: 3px 0 0 color-mix(in srgb, var(--mg) 35%, transparent), -3px 0 0 color-mix(in srgb, var(--cy) 35%, transparent); }
-  h1 em { font-style: normal; color: var(--cy); text-shadow: 0 0 14px color-mix(in srgb, var(--cy) 75%, transparent), 0 0 44px color-mix(in srgb, var(--cy) 40%, transparent); }
+  h1 { margin: 0; font-family: var(--font-heading); font-weight: 500; font-size: clamp(38px, 7vw, 88px); line-height: 0.96; letter-spacing: -0.035em; max-width: 15em; color: var(--fg-bright); text-shadow: var(--split); }
+  h1 em { font-style: normal; color: var(--cy); text-shadow: var(--cy-glow); }
   .hero-side { display: grid; gap: var(--space-8); padding-bottom: var(--space-3); }
   .lede { margin: 0; font-family: var(--mono); font-size: 14px; line-height: 1.7; color: var(--fg-dim); text-wrap: pretty; }
-  .cta { justify-self: start; font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; padding: 10px 18px; color: var(--ink); background: var(--cy); clip-path: polygon(0 0, 100% 0, 100% 62%, calc(100% - 12px) 100%, 0 100%); box-shadow: 0 0 26px color-mix(in srgb, var(--cy) 45%, transparent); }
-  .cta:hover { color: var(--ink); background: color-mix(in srgb, var(--cy) 60%, #ffffff); box-shadow: 0 0 38px color-mix(in srgb, var(--cy) 70%, transparent); }
+  .cta { justify-self: start; font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; padding: 10px 18px; color: var(--ink); background: var(--cy); clip-path: polygon(0 0, 100% 0, 100% 62%, calc(100% - 12px) 100%, 0 100%); box-shadow: 0 0 26px var(--cy-45); }
+  .cta:hover { color: var(--ink); background: var(--cy-hi); box-shadow: 0 0 38px var(--cy-70); }
 
   .band { display: grid; grid-template-columns: minmax(0, 190px) minmax(0, 1fr); gap: clamp(20px, 4vw, 64px); padding: var(--band) 0; border-bottom: 1px solid var(--hair); }
   .band:last-of-type { border-bottom: 0; padding-bottom: 0; }
@@ -70,11 +142,11 @@
   .story p:first-child { font-size: clamp(19px, 2vw, 24px); line-height: 1.45; letter-spacing: -0.012em; color: var(--fg-bright); }
 
   .tags { display: flex; flex-wrap: wrap; gap: var(--space-3); align-content: start; font-family: var(--mono); }
-  .tags span { font-size: 12px; padding: 6px 12px; color: var(--cy); border: 1px solid color-mix(in srgb, var(--cy) 50%, transparent); background: color-mix(in srgb, var(--cy) 7%, transparent); }
-  .tags span:nth-child(even) { color: var(--mg); border-color: color-mix(in srgb, var(--mg) 50%, transparent); background: color-mix(in srgb, var(--mg) 7%, transparent); }
+  .tags span { font-size: 12px; padding: 6px 12px; color: var(--cy); border: 1px solid var(--cy-50); background: var(--cy-07); }
+  .tags span:nth-child(even) { color: var(--mg); border-color: var(--mg-50); background: var(--mg-07); }
 
   .cells { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-4); align-content: start; }
-  .cell { padding: var(--space-8); border: 1px solid color-mix(in srgb, var(--cy) 26%, transparent); background: color-mix(in srgb, var(--cy) 5%, transparent); clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%); }
+  .cell { padding: var(--space-8); border: 1px solid var(--cy-26); background: var(--cy-05); clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%); }
   .cell-label { margin: 0 0 var(--space-4); font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mg); }
   .cell p { margin: 0; font-size: 15px; line-height: 1.65; }
 
@@ -106,6 +178,9 @@
       {%- for item in nav %}
       <a href="{{ item.href }}">{{ item.label }}</a>
       {%- endfor %}
+      <button type="button" class="theme-btn" id="theme-toggle" aria-label="Switch theme">
+        &lt;<span class="to-light">light</span><span class="to-dark">dark</span>&gt;
+      </button>
     </nav>
   </header>
 
@@ -176,12 +251,19 @@
     {%- endif %}
 
     <footer>
-      <span>&copy; <span id="year"></span> {{ site.handle | default(me.name) }}</span>
+      <span>&copy; {{ year }} {{ site.handle | default(me.name) }}</span>
       {%- if site.footer_note %}<span>{{ site.footer_note }}</span>{% endif %}
     </footer>
 
   </div>
 </div>
-<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script>
+  document.getElementById("theme-toggle").addEventListener("click", function () {
+    var root = document.documentElement;
+    var next = root.dataset.theme === "light" ? "dark" : "light";
+    root.dataset.theme = next;
+    try { localStorage.setItem("cyberpunk-theme", next); } catch (e) {}
+  });
+</script>
 </body>
 </html>
