@@ -1,0 +1,47 @@
+name: Build site
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - content.yml
+      - templates/**
+      - static/**
+      - build.py
+      - requirements.txt
+
+# Cancel a stale run if the PR gets pushed again before this one finishes.
+concurrency:
+  group: build-site-${{ github.head_ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # PRs from forks can't be pushed to with the default token — skip those.
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Build site
+        run: python build.py
+
+      - name: Commit generated site
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Build site from content.yml"
+          file_pattern: docs/**
