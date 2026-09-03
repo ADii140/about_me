@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default('en') }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ site.title }}</title>
+<meta name="description" content="{{ site.description }}">
+<link rel="stylesheet" href="{{ base_url }}static/styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --cy: {{ site.accent | default('#62e8e0') }};        /* primary neon  */
+    --mg: {{ site.accent_2 | default('#ff4a9e') }};      /* counter neon  */
+    --ink: #0d0f18;
+    --fg: #dfe6ef;
+    --fg-bright: #f2f6fb;
+    --fg-dim: #8b9bb0;
+    --fg-faint: #4a5568;
+    --hair: color-mix(in srgb, var(--cy) 22%, transparent);
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --gutter: clamp(20px, 5vw, 72px);
+    --band: clamp(44px, 7vh, 88px);
+  }
+  html { scroll-behavior: smooth; overflow-x: clip; }
+  html, body { margin: 0; padding: 0; background: var(--ink); }
+  a { color: var(--cy); text-decoration: none; }
+  a:hover { color: color-mix(in srgb, var(--cy) 55%, #ffffff); }
+  :focus-visible { outline: 2px solid var(--cy); outline-offset: 2px; }
+  ::selection { background: color-mix(in srgb, var(--cy) 35%, transparent); }
+
+  .page {
+    position: relative; min-height: 100vh; color: var(--fg); font-family: var(--font-body);
+    background:
+      linear-gradient(180deg, var(--ink), #12141f 60%, var(--ink)),
+      radial-gradient(70% 40% at 12% 0%, color-mix(in srgb, var(--cy) 16%, transparent), transparent 70%),
+      radial-gradient(60% 40% at 92% 88%, color-mix(in srgb, var(--mg) 16%, transparent), transparent 70%);
+  }
+  .scan { position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(180deg, rgba(255,255,255,0.035) 0 1px, transparent 1px 3px); }
+
+  .top {
+    position: sticky; top: 0; z-index: 5; display: flex; align-items: center; justify-content: space-between;
+    gap: var(--space-8); padding: var(--space-4) var(--gutter); font-family: var(--mono);
+    background: color-mix(in srgb, var(--ink) 82%, transparent); backdrop-filter: blur(10px);
+    border-bottom: 1px solid color-mix(in srgb, var(--cy) 28%, transparent);
+  }
+  .brand { display: flex; align-items: center; gap: var(--space-3); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--cy); }
+  .brand::before { content: ""; width: 8px; height: 8px; background: var(--mg); box-shadow: 0 0 8px var(--mg), 0 0 20px color-mix(in srgb, var(--mg) 70%, transparent); }
+  .brand i { font-style: normal; color: var(--fg-faint); }
+  .top nav { display: flex; gap: var(--space-6); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; }
+  .top nav a { color: var(--fg-dim); }
+  .body { position: relative; padding: 0 var(--gutter) 140px; }
+
+  .hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.4fr); gap: clamp(24px, 5vw, 64px); align-items: end; padding: clamp(64px, 11vh, 140px) 0 var(--band); border-bottom: 1px solid var(--hair); }
+  .kicker { margin: 0 0 var(--space-6); font-family: var(--mono); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--mg); }
+  h1 { margin: 0; font-family: var(--font-heading); font-weight: 500; font-size: clamp(38px, 7vw, 88px); line-height: 0.96; letter-spacing: -0.035em; max-width: 15em; color: var(--fg-bright); text-shadow: 3px 0 0 color-mix(in srgb, var(--mg) 35%, transparent), -3px 0 0 color-mix(in srgb, var(--cy) 35%, transparent); }
+  h1 em { font-style: normal; color: var(--cy); text-shadow: 0 0 14px color-mix(in srgb, var(--cy) 75%, transparent), 0 0 44px color-mix(in srgb, var(--cy) 40%, transparent); }
+  .hero-side { display: grid; gap: var(--space-8); padding-bottom: var(--space-3); }
+  .lede { margin: 0; font-family: var(--mono); font-size: 14px; line-height: 1.7; color: var(--fg-dim); text-wrap: pretty; }
+  .cta { justify-self: start; font-family: var(--mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; padding: 10px 18px; color: var(--ink); background: var(--cy); clip-path: polygon(0 0, 100% 0, 100% 62%, calc(100% - 12px) 100%, 0 100%); box-shadow: 0 0 26px color-mix(in srgb, var(--cy) 45%, transparent); }
+  .cta:hover { color: var(--ink); background: color-mix(in srgb, var(--cy) 60%, #ffffff); box-shadow: 0 0 38px color-mix(in srgb, var(--cy) 70%, transparent); }
+
+  .band { display: grid; grid-template-columns: minmax(0, 190px) minmax(0, 1fr); gap: clamp(20px, 4vw, 64px); padding: var(--band) 0; border-bottom: 1px solid var(--hair); }
+  .band:last-of-type { border-bottom: 0; padding-bottom: 0; }
+  .band-label { position: sticky; top: 84px; align-self: start; font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cy); }
+
+  .story { display: grid; gap: var(--space-8); max-width: 33em; }
+  .story p { margin: 0; font-size: 16px; line-height: 1.8; color: var(--fg-dim); text-wrap: pretty; }
+  .story p:first-child { font-size: clamp(19px, 2vw, 24px); line-height: 1.45; letter-spacing: -0.012em; color: var(--fg-bright); }
+
+  .tags { display: flex; flex-wrap: wrap; gap: var(--space-3); align-content: start; font-family: var(--mono); }
+  .tags span { font-size: 12px; padding: 6px 12px; color: var(--cy); border: 1px solid color-mix(in srgb, var(--cy) 50%, transparent); background: color-mix(in srgb, var(--cy) 7%, transparent); }
+  .tags span:nth-child(even) { color: var(--mg); border-color: color-mix(in srgb, var(--mg) 50%, transparent); background: color-mix(in srgb, var(--mg) 7%, transparent); }
+
+  .cells { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-4); align-content: start; }
+  .cell { padding: var(--space-8); border: 1px solid color-mix(in srgb, var(--cy) 26%, transparent); background: color-mix(in srgb, var(--cy) 5%, transparent); clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%); }
+  .cell-label { margin: 0 0 var(--space-4); font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--mg); }
+  .cell p { margin: 0; font-size: 15px; line-height: 1.65; }
+
+  .hello { max-width: 34em; }
+  .say { margin: 0 0 36px; font-size: clamp(19px, 2vw, 24px); line-height: 1.45; letter-spacing: -0.012em; color: var(--fg-bright); text-wrap: pretty; }
+  .links { display: grid; font-family: var(--mono); }
+  .links a { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-6); font-size: 14px; padding: var(--space-6) 0; border-top: 1px solid var(--hair); color: var(--fg); }
+  .links a:last-child { border-bottom: 1px solid var(--hair); }
+  .links a:hover { color: var(--cy); }
+  .links .k { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--fg-faint); }
+
+  footer { margin-top: 88px; display: flex; justify-content: space-between; gap: var(--space-6); font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; color: var(--fg-faint); }
+
+  @media (max-width: 760px) {
+    .hero, .band { grid-template-columns: 1fr; }
+    .band-label { position: static; }
+    h1 { font-size: clamp(32px, 10vw, 54px); }
+    .top nav { gap: var(--space-4); }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="scan"></div>
+
+  <header class="top">
+    <span class="brand">{{ site.handle | default('your_name') }}<i>.exe</i></span>
+    <nav>
+      {%- for item in nav %}
+      <a href="{{ item.href }}">{{ item.label }}</a>
+      {%- endfor %}
+    </nav>
+  </header>
+
+  <div class="body">
+
+    <section class="hero">
+      <div>
+        <p class="kicker">{{ me.kicker | default('> init // hello') }}</p>
+        {# wrap the neon words in <em> inside content.yml #}
+        <h1>{{ me.headline | safe }}</h1>
+      </div>
+      <div class="hero-side">
+        {%- if me.lede %}<p class="lede">{{ me.lede }}</p>{% endif %}
+        {%- for action in me.actions %}
+        <a href="{{ action.href }}" class="cta">{{ action.label }}</a>
+        {%- endfor %}
+      </div>
+    </section>
+
+    {%- if story %}
+    <section id="me" class="band">
+      <div class="band-label">[01]&nbsp;&nbsp;{{ story_heading | default('bio.log') }}</div>
+      <div class="story">
+        {%- for paragraph in story %}
+        <p>{{ paragraph }}</p>
+        {%- endfor %}
+      </div>
+    </section>
+    {%- endif %}
+
+    {%- if likes %}
+    <section id="likes" class="band">
+      <div class="band-label">[02]&nbsp;&nbsp;{{ likes_heading | default('likes[]') }}</div>
+      <div class="tags">
+        {%- for like in likes %}
+        <span>{{ like }}</span>
+        {%- endfor %}
+      </div>
+    </section>
+    {%- endif %}
+
+    {%- if lately %}
+    <section id="lately" class="band">
+      <div class="band-label">[03]&nbsp;&nbsp;{{ lately_heading | default('now.feed') }}</div>
+      <div class="cells">
+        {%- for entry in lately %}
+        <div class="cell">
+          <p class="cell-label">{{ entry.label }}</p>
+          <p>{{ entry.text }}</p>
+        </div>
+        {%- endfor %}
+      </div>
+    </section>
+    {%- endif %}
+
+    {%- if links %}
+    <section id="hello" class="band">
+      <div class="band-label">[04]&nbsp;&nbsp;{{ hello_heading | default('ping()') }}</div>
+      <div class="hello">
+        {%- if hello_note %}<p class="say">{{ hello_note }}</p>{% endif %}
+        <div class="links">
+          {%- for link in links %}
+          <a href="{{ link.href }}"><span class="k">{{ link.label }}</span><span>{{ link.value }}</span></a>
+          {%- endfor %}
+        </div>
+      </div>
+    </section>
+    {%- endif %}
+
+    <footer>
+      <span>&copy; {{ year }} {{ site.handle | default(me.name) }}</span>
+      {%- if site.footer_note %}<span>{{ site.footer_note }}</span>{% endif %}
+    </footer>
+
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+site:
+  title: "Your Name"
+  description: "A personal page — who I am, what I'm into, how to reach me."
+  lang: en
+  handle: "your_name"          # shown in the header and footer
+  footer_note: "built by hand // no cookies"
+  accent: "#62e8e0"            # primary neon (cyan)
+  accent_2: "#ff4a9e"          # counter neon (magenta)
+
+nav:
+  - { label: "[01] bio", href: "#me" }
+  - { label: "[02] likes", href: "#likes" }
+  - { label: "[03] lately", href: "#lately" }
+  - { label: "[04] ping", href: "#hello" }
+
+me:
+  name: "Your Name"
+  kicker: "> init // hello"
+  # <em>…</em> renders in the neon accent with a glow
+  headline: "I'm Your Name, and this is my <em>corner of the net</em>."
+  lede: "A line about who you are outside of work — where you live, who you live with, what you do on a Sunday."
+  actions:
+    - { label: "ping me", href: "#hello" }
+
+story_heading: "bio.log"
+story:
+  - "Start where you actually started — the thing you were obsessed with as a kid that still shows up in how you think."
+  - "Then the middle: how you ended up doing what you do, told as a story rather than a timeline. The wrong turns are the interesting part."
+  - "Then now: what your days look like, and what you would happily talk about for an hour with someone who asked."
+
+likes_heading: "likes[]"
+likes:
+  - "something you like"
+  - "a place"
+  - "a kind of music"
+  - "a food you'd defend"
+  - "an unreasonable hobby"
+  - "a word you overuse"
+
+lately_heading: "now.feed"
+lately:
+  - { label: "reading", text: "A book, and one honest line about it." }
+  - { label: "listening", text: "Whatever has been on repeat this month." }
+  - { label: "learning", text: "Something you are bad at on purpose." }
+  - { label: "tinkering", text: "A small project with no ambitions." }
+
+hello_heading: "ping()"
+hello_note: "I like getting email from strangers. If any of this overlapped with something of yours, tell me about it."
+
+links:
+  - { label: "mail", value: "you@example.com", href: "mailto:you@example.com" }
+  - { label: "github", value: "@yourhandle", href: "https://github.com/yourhandle" }
+  - { label: "elsewhere", value: "@yourhandle", href: "https://example.com" }
