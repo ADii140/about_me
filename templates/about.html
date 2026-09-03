@@ -176,11 +176,12 @@
     {%- endif %}
 
     <footer>
-      <span>&copy; {{ year }} {{ site.handle | default(me.name) }}</span>
+      <span>&copy; <span id="year"></span> {{ site.handle | default(me.name) }}</span>
       {%- if site.footer_note %}<span>{{ site.footer_note }}</span>{% endif %}
     </footer>
 
   </div>
 </div>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>

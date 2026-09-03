@@ -4,29 +4,35 @@ Jinja2 template + Python build, output ready for GitHub Pages. A personal page,
 not a resume: an intro, a longer story, things you like, what you're into
 lately, and how to reach you.
 
-```
-site/
-  content.yml          all the copy — edit this, not the template
-  templates/about.html the Jinja2 template (styling inline in <head>)
-  static/styles.css    Nocturne design tokens (type, spacing, radii)
-  build.py             renders content.yml -> docs/index.html
+```text
+content.yml              all the copy — edit this, not the template
+templates/about.html     the Jinja2 template (styling inline in <head>)
+static/styles.css        Nocturne design tokens (type, spacing, radii)
+build.py                 renders content.yml -> docs/index.html
+.github/workflows/       CI: rebuilds docs/ on every PR to main
 ```
 
 ## Build
 
 ```bash
-pip install jinja2 pyyaml
+pip install -r requirements.txt
 python build.py
 ```
 
-Output lands in `site/docs/` (`index.html`, `static/`, `.nojekyll`).
+Output lands in `docs/` (`index.html`, `static/`, `.nojekyll`).
 
 ## Publish
 
 Commit `docs/` and set GitHub Pages to **Deploy from a branch → main → /docs**.
 
-If the site lives at `username.github.io/repo-name`, set `BASE_URL = "/repo-name/"`
-in `build.py` so `static/styles.css` resolves.
+Every PR into `main` that touches `content.yml`, `templates/`, `static/`, `build.py`, or
+`requirements.txt` runs [`.github/workflows/build-site.yml`](.github/workflows/build-site.yml),
+which re-renders the site and pushes the updated `docs/` straight onto the PR branch. So in
+practice: edit `content.yml`, open a PR, review the generated diff, merge — that merge is what
+publishes.
+
+If the site lives at `username.github.io/repo-name`, set `base_url: "/repo-name/"` in
+`content.yml` so `static/styles.css` resolves.
 
 ## Template contract
 
@@ -40,11 +46,10 @@ in `build.py` so `static/styles.css` resolves.
 | `lately_heading`, `lately` | heading string + list of `{label, text}` |
 | `hello_heading`, `hello_note` | heading string + a lead-in line |
 | `links` | list of `{label, value, href}` |
-| `base_url`, `year` | supplied by `build.py` |
+| `base_url` | top-level key in `content.yml`, default `""` (see Publish) |
 
 `story`, `likes`, `lately` and `links` are each wrapped in `{% if %}` — drop a
 section by removing its key from `content.yml`. Recolor the whole page from
 `site.accent` / `site.accent_2`; every border, glow and chip derives from them.
-
-The Warcraft variant lives in `About Me Warcraft.dc.html` at the project root if
-you want it ported too.
+The footer year is set client-side via a small inline script, so it's always current
+without a rebuild.

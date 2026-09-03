@@ -7,6 +7,10 @@ site:
   accent: "#62e8e0"            # primary neon (cyan)
   accent_2: "#ff4a9e"          # counter neon (magenta)
 
+# Leave empty for a user/org page (username.github.io) or a custom domain.
+# Set to "/repo-name/" if this is served as a project page at username.github.io/repo-name.
+base_url: ""
+
 nav:
   - { label: "[01] bio", href: "#me" }
   - { label: "[02] likes", href: "#likes" }
