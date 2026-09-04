@@ -49,7 +49,7 @@ hello_heading: "ping()"
 hello_note: "I like getting email from strangers. If any of this overlapped with something of yours — reliability work, a good novel, or a better game than the one I'm currently playing — tell me about it."
 
 links:
-  - { label: "mail", value: "you@example.com", href: "mailto:you@example.com" }   # TODO: your address
+  - { label: "mail", value: "adrian@devoops.pl", href: "mailto:adrian@devoops.pl" }
   - { label: "github", value: "@ADii140", href: "https://github.com/ADii140" }
-  - { label: "medium", value: "@yourhandle", href: "https://medium.com/@a.klosowski23" } 
-  - { label: "linkedin", value: "adrian", href: "https://www.linkedin.com/in/adrian-kłosowski-5a5a4a141/" } # TODO or delete
+  - { label: "medium", value: "@a.klosowski23", href: "https://medium.com/@a.klosowski23" } 
+  - { label: "linkedin", value: "adrian kłosowski", href: "https://www.linkedin.com/in/adrian-kłosowski-5a5a4a141/" }
