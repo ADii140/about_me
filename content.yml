@@ -4,7 +4,7 @@ site:
   lang: en
   handle: "adii140"                        # shown in the header and footer
   footer_note: "static // hand-tuned // no trackers, no cookies"
-  accent: "#62e8e0"                        # cyan — keep, or swap for 2077 yellow "#fcee0a"
+  accent: "#62e8e0"                        # cyan — keep, or swap for anything that reads well on black
   accent_2: "#ff4a9e"                      # magenta
 
 # Empty = user page (username.github.io) or custom domain.
@@ -20,7 +20,7 @@ me:
   name: "Adrian"
   kicker: "> ssh adrian@krakow — connected"
   headline: "I'm Adrian. I keep systems <em>boring</em> so the interesting parts stay interesting."
-  lede: "Off the clock I'm somewhere on a bike, deep in video games, or rewriting the same Python script for the fourth time because version three offended me."
+  lede: "Off the clock I'm somewhere outside, somewhere in Azeroth, or rewriting the same Python script for the fourth time because version three offended me."
   actions:
     - { label: "ping me", href: "#hello" }
 
@@ -28,29 +28,28 @@ story_heading: "bio.log"
 story:
   - "I was the kid who took things apart to see whether they'd go back together, and who was quietly more interested in the taking-apart. That never really changed — I just found an industry that pays for it."
   - "The route here wasn't planned. Nearly a decade of engineering at one company, then a jump into cloud and reliability work at another, and somewhere in the middle the realisation that the part I actually loved was removing the reason a problem existed rather than fixing the problem again. That's the whole job description, more or less: notice the thing everyone has quietly accepted as normal, and refuse to accept it."
-  - "I'm a generalist by instinct: I'd rather borrow an idea from an unrelated field than perfect one I already know. Ask me about error budgets, why most alerts are noise, cyberpunk as a genre that got uncomfortably accurate, or the economics of a virtual auction house. I'll take any of those for an hour."
+  - "I'm a generalist by instinct: I'd rather borrow an idea from an unrelated field than perfect one I already know. Ask me about error budgets, why most alerts are noise, what twenty years of Warcraft patch notes teach you about changing a system people depend on, or the economics of a virtual auction house. I'll take any of those for an hour."
 
 likes_heading: "likes[]"
 likes:
-  - "books — Ziemianski first, then everything that followed"
-  - "Kraków in November, when the tourists have gone"
+  - "books — Ziemiański first, then everything that followed"
   - "Rise Against, loud, ideally live"
-  - "mountain bike trails that are slightly beyond my skill level"
+  - "kayaks, bikes, volleyball, skiing — just let me stay moving"
+  - "games — World of Warcraft, Restoration Shaman forever"
   - "optimising an in-game economy for gold I will never spend"
   - "\"it depends\" — my most-used and least-helpful phrase"
 
 lately_heading: "now.feed"
 lately:
-  - { label: "reading", text: "Gibson's Sprawl Trilogy again. Neuromancer holds up; the sequels are better than people admit." }
-  - { label: "listening", text: "Rise Against on repeat, plus whatever Spotify decides I need." }
+  - { label: "reading", text: "Dune. God Emperor did nothing wrong." }
   - { label: "learning", text: "Python, properly this time — building small things I can actually put on the internet." }
-  - { label: "gaming", text: "World of Warcraft, mostly. Restoration Shaman in my heart forever - esepecially the one from WotLK!" }
+  - { label: "gaming", text: "Assassin's Creed Black Flag Resynced — missed it first time round, catching up 13 years late. WoW is still the constant; everything else is what I play between patches." }
 
 hello_heading: "ping()"
-hello_note: "I like getting email from strangers. If any of this overlapped with something of yours — reliability work, a  goode novel to read or even better game to play — tell me about it."
+hello_note: "I like getting email from strangers. If any of this overlapped with something of yours — reliability work, a good novel, or a better game than the one I'm currently playing — tell me about it."
 
 links:
   - { label: "mail", value: "you@example.com", href: "mailto:you@example.com" }   # TODO: your address
   - { label: "github", value: "@ADii140", href: "https://github.com/ADii140" }
-  - { label: "medium", value: "@yourhandle", href: "https://medium.com/@yourhandle" }  # TODO: your Medium handle
-  - { label: "linkedin", value: "adrian", href: "https://linkedin.com/in/yourhandle" } # TODO or delete
+  - { label: "medium", value: "@yourhandle", href: "https://medium.com/@a.klosowski23" } 
+  - { label: "linkedin", value: "adrian", href: "https://www.linkedin.com/in/adrian-kłosowski-5a5a4a141/" } # TODO or delete
