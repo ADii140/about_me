@@ -1,57 +1,56 @@
 site:
-  title: "Your Name"
-  description: "A personal page — who I am, what I'm into, how to reach me."
+  title: "Adrian"                          # add your surname if you want the site to be findable by name
+  description: "SRE by trade, generalist by temperament. Kraków, Poland."
   lang: en
-  handle: "your_name"          # shown in the header and footer
-  footer_note: "built by hand // no cookies"
-  accent: "#62e8e0"            # primary neon (cyan)
-  accent_2: "#ff4a9e"          # counter neon (magenta)
+  handle: "adii140"                        # shown in the header and footer
+  footer_note: "static // hand-tuned // no trackers, no cookies"
+  accent: "#62e8e0"                        # cyan — keep, or swap for 2077 yellow "#fcee0a"
+  accent_2: "#ff4a9e"                      # magenta
 
-# Leave empty for a user/org page (username.github.io) or a custom domain.
-# Set to "/repo-name/" if this is served as a project page at username.github.io/repo-name.
+# Empty = user page (username.github.io) or custom domain.
 base_url: ""
 
 nav:
-  - { label: "[01] bio", href: "#me" }
+  - { label: "[01] whoami", href: "#me" }
   - { label: "[02] likes", href: "#likes" }
-  - { label: "[03] lately", href: "#lately" }
+  - { label: "[03] uptime", href: "#lately" }
   - { label: "[04] ping", href: "#hello" }
 
 me:
-  name: "Your Name"
-  kicker: "> init // hello"
-  # <em>…</em> renders in the neon accent with a glow
-  headline: "I'm Your Name, and this is my <em>corner of the net</em>."
-  lede: "A line about who you are outside of work — where you live, who you live with, what you do on a Sunday."
+  name: "Adrian"
+  kicker: "> ssh adrian@krakow — connected"
+  headline: "I'm Adrian. I keep systems <em>boring</em> so the interesting parts stay interesting."
+  lede: "Off the clock I'm somewhere on a bike, deep in video games, or rewriting the same Python script for the fourth time because version three offended me."
   actions:
     - { label: "ping me", href: "#hello" }
 
 story_heading: "bio.log"
 story:
-  - "Start where you actually started — the thing you were obsessed with as a kid that still shows up in how you think."
-  - "Then the middle: how you ended up doing what you do, told as a story rather than a timeline. The wrong turns are the interesting part."
-  - "Then now: what your days look like, and what you would happily talk about for an hour with someone who asked."
+  - "I was the kid who took things apart to see whether they'd go back together, and who was quietly more interested in the taking-apart. That never really changed — I just found an industry that pays for it."
+  - "The route here wasn't planned. Nearly a decade of engineering at one company, then a jump into cloud and reliability work at another, and somewhere in the middle the realisation that the part I actually loved was removing the reason a problem existed rather than fixing the problem again. That's the whole job description, more or less: notice the thing everyone has quietly accepted as normal, and refuse to accept it."
+  - "I'm a generalist by instinct: I'd rather borrow an idea from an unrelated field than perfect one I already know. Ask me about error budgets, why most alerts are noise, cyberpunk as a genre that got uncomfortably accurate, or the economics of a virtual auction house. I'll take any of those for an hour."
 
 likes_heading: "likes[]"
 likes:
-  - "something you like"
-  - "a place"
-  - "a kind of music"
-  - "a food you'd defend"
-  - "an unreasonable hobby"
-  - "a word you overuse"
+  - "books — Ziemianski first, then everything that followed"
+  - "Kraków in November, when the tourists have gone"
+  - "Rise Against, loud, ideally live"
+  - "mountain bike trails that are slightly beyond my skill level"
+  - "optimising an in-game economy for gold I will never spend"
+  - "\"it depends\" — my most-used and least-helpful phrase"
 
 lately_heading: "now.feed"
 lately:
-  - { label: "reading", text: "A book, and one honest line about it." }
-  - { label: "listening", text: "Whatever has been on repeat this month." }
-  - { label: "learning", text: "Something you are bad at on purpose." }
-  - { label: "tinkering", text: "A small project with no ambitions." }
+  - { label: "reading", text: "Gibson's Sprawl Trilogy again. Neuromancer holds up; the sequels are better than people admit." }
+  - { label: "listening", text: "Rise Against on repeat, plus whatever Spotify decides I need." }
+  - { label: "learning", text: "Python, properly this time — building small things I can actually put on the internet." }
+  - { label: "gaming", text: "World of Warcraft, mostly. Restoration Shaman in my heart forever - esepecially the one from WotLK!" }
 
 hello_heading: "ping()"
-hello_note: "I like getting email from strangers. If any of this overlapped with something of yours, tell me about it."
+hello_note: "I like getting email from strangers. If any of this overlapped with something of yours — reliability work, a  goode novel to read or even better game to play — tell me about it."
 
 links:
-  - { label: "mail", value: "you@example.com", href: "mailto:you@example.com" }
-  - { label: "github", value: "@yourhandle", href: "https://github.com/yourhandle" }
-  - { label: "elsewhere", value: "@yourhandle", href: "https://example.com" }
+  - { label: "mail", value: "you@example.com", href: "mailto:you@example.com" }   # TODO: your address
+  - { label: "github", value: "@ADii140", href: "https://github.com/ADii140" }
+  - { label: "medium", value: "@yourhandle", href: "https://medium.com/@yourhandle" }  # TODO: your Medium handle
+  - { label: "linkedin", value: "adrian", href: "https://linkedin.com/in/yourhandle" } # TODO or delete
