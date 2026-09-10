@@ -1,0 +1,59 @@
+name: Update articles
+
+on:
+  schedule:
+    # Sunday 18:00 UTC — Sunday evening in Europe/Warsaw (20:00 CEST, 19:00 CET).
+    - cron: "0 18 * * 0"
+  workflow_dispatch:
+
+# Never refresh twice at once; a manual run queues behind a scheduled one.
+concurrency:
+  group: update-articles
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v7
+        with:
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Read the Medium feed
+        run: python update_articles.py
+
+      - name: Build site
+        # articles.yml feeds build.py, and a PR opened with GITHUB_TOKEN cannot trigger
+        # the "Build site" workflow — so render docs/ here, into the same PR.
+        run: python build.py
+
+      - name: Open a pull request
+        # No changes in the feed means no commit, no branch and no PR — the job just ends green.
+        uses: peter-evans/create-pull-request@v8
+        with:
+          branch: automation/update-articles
+          delete-branch: true
+          add-paths: |
+            articles.yml
+            docs/**
+          commit-message: "Update articles from the Medium feed"
+          title: "Update articles from the Medium feed"
+          body: |
+            Weekly refresh of `articles.yml` from the Medium RSS feed, with `docs/` rebuilt to match.
+
+            Opened by the [Update articles](${{ github.server_url }}/${{ github.repository }}/blob/main/.github/workflows/update-articles.yml) workflow
+            ([run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})).
+            Merge it if the five posts look right.
