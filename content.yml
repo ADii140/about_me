@@ -1,5 +1,5 @@
 site:
-  title: "Adrian"                          # add your surname if you want the site to be findable by name
+  title: "Adrian Kłosowski @devoops.pl"                          # add your surname if you want the site to be findable by name
   description: "SRE by trade, generalist by temperament. Kraków, Poland."
   lang: en
   handle: "adii140"                        # shown in the header and footer
