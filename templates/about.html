@@ -110,11 +110,13 @@
   .brand { display: flex; align-items: center; gap: var(--space-3); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--fg-bright); }
   .brand::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--sweep); }
   .brand i { font-style: normal; color: var(--fg-faint); }
-  .top nav { display: flex; align-items: center; gap: var(--space-6); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; }
+  .top nav { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-6); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; }
+  .top nav .n { font-style: normal; }
   .top nav a:nth-of-type(1) { color: var(--c1); }
   .top nav a:nth-of-type(2) { color: var(--c2); }
   .top nav a:nth-of-type(3) { color: var(--c5); }
-  .top nav a:nth-of-type(4) { color: var(--c7); }
+  .top nav a:nth-of-type(4) { color: var(--c6); }
+  .top nav a:nth-of-type(5) { color: var(--c7); }
   .theme-btn { font: inherit; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); background: var(--sweep); border: 0; padding: 5px 10px; cursor: pointer; }
   .theme-btn:hover { filter: brightness(1.12); }
   .theme-btn .to-dark { display: none; }
@@ -138,6 +140,7 @@
   #me .band-label { background: var(--c1); }
   #likes .band-label { background: var(--c2); }
   #lately .band-label { background: var(--c5); }
+  #medium .band-label { background: var(--c6); }
   #hello .band-label { background: var(--c7); }
 
   .story { display: grid; gap: var(--space-8); max-width: 33em; }
@@ -165,6 +168,24 @@
   .cell:nth-child(4n+4) .cell-label { color: var(--c8-ink); }
   .cell p { margin: 0; font-size: 15px; line-height: 1.65; }
 
+  .posts { display: grid; max-width: 46em; }
+  .post { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: var(--space-4) var(--space-8); padding: var(--space-6) 0; border-top: 2px solid var(--c1); color: var(--fg); }
+  .post:last-child { border-bottom: 2px solid var(--c8); }
+  .post:nth-child(5n+2) { border-top-color: var(--c3); }
+  .post:nth-child(5n+3) { border-top-color: var(--c4); }
+  .post:nth-child(5n+4) { border-top-color: var(--c6); }
+  .post:nth-child(5n+5) { border-top-color: var(--c7); }
+  .post-title { margin: 0; font-family: var(--font-heading); font-weight: 500; font-size: clamp(17px, 1.6vw, 21px); line-height: 1.3; letter-spacing: -0.015em; color: var(--fg-bright); text-wrap: pretty; }
+  .post-blurb { margin: var(--space-3) 0 0; font-size: 14px; line-height: 1.6; color: var(--fg-dim); text-wrap: pretty; }
+  .post-meta { display: flex; gap: var(--space-4); font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-faint); white-space: nowrap; }
+  .post:hover .post-title { color: var(--c1); }
+  .post:nth-child(5n+2):hover .post-title { color: var(--c3); }
+  .post:nth-child(5n+3):hover .post-title { color: var(--c4); }
+  .post:nth-child(5n+4):hover .post-title { color: var(--c6); }
+  .post:nth-child(5n+5):hover .post-title { color: var(--c7); }
+  .posts-all { justify-self: start; margin-top: var(--space-8); font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--c6); }
+  .posts-all:hover { color: var(--fg-bright); }
+
   .hello { max-width: 34em; }
   .say { margin: 0 0 36px; font-size: clamp(19px, 2vw, 24px); line-height: 1.45; letter-spacing: -0.012em; color: var(--fg-bright); text-wrap: pretty; }
   .links { display: grid; font-family: var(--mono); }
@@ -177,11 +198,25 @@
 
   footer { margin-top: 72px; display: flex; justify-content: space-between; gap: var(--space-6); font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; color: var(--fg-faint); }
 
+  @media (max-width: 560px) {
+    .post { grid-template-columns: 1fr; }
+  }
+
+  section { scroll-margin-top: 84px; }
+
   @media (max-width: 760px) {
     .hero, .band { grid-template-columns: 1fr; }
     .band-label { position: static; }
     h1 { font-size: clamp(32px, 10vw, 54px); }
-    .top nav { gap: var(--space-3); }
+    .top nav { gap: 14px; }
+    .top nav .n { display: none; }
+  }
+
+  @media (max-width: 540px) {
+    .top { flex-wrap: wrap; gap: 10px; }
+    .brand { flex: 1 1 auto; }
+    .top nav { order: 3; width: 100%; justify-content: space-between; gap: 6px; font-size: 10px; letter-spacing: 0.1em; }
+    section { scroll-margin-top: 112px; }
   }
 </style>
 </head>
@@ -194,7 +229,8 @@
     <span class="brand">{{ site.handle | default('your_name') }}<i>.exe</i></span>
     <nav>
       {%- for item in nav %}
-      <a href="{{ item.href }}">{{ item.label }}</a>
+      {%- set parts = item.label.split('] ') %}
+      <a href="{{ item.href }}">{% if parts | length > 1 %}<i class="n">{{ parts[0] }}] </i>{{ parts[1:] | join('] ') }}{% else %}{{ item.label }}{% endif %}</a>
       {%- endfor %}
       <button type="button" class="theme-btn" id="theme-toggle" aria-label="Switch theme">
         &lt;<span class="to-light">light</span><span class="to-dark">dark</span>&gt;
@@ -254,9 +290,34 @@
     </section>
     {%- endif %}
 
+    {%- if medium and medium.articles %}
+    <section id="medium" class="band">
+      <div class="band-label">[04] {{ medium.heading | default('medium.feed') }}</div>
+      <div>
+        <div class="posts">
+          {%- for article in medium.articles[:5] %}
+          <a class="post" href="{{ article.href }}" target="_blank" rel="noopener">
+            <div>
+              <p class="post-title">{{ article.title }}</p>
+              {%- if article.blurb %}<p class="post-blurb">{{ article.blurb }}</p>{% endif %}
+            </div>
+            <div class="post-meta">
+              {%- if article.date %}<span>{{ article.date }}</span>{% endif %}
+              {%- if article.read_time %}<span>{{ article.read_time }}</span>{% endif %}
+            </div>
+          </a>
+          {%- endfor %}
+        </div>
+        {%- if medium.profile and medium.profile.href %}
+        <a class="posts-all" href="{{ medium.profile.href }}" target="_blank" rel="noopener">{{ medium.profile.label | default('read everything on medium') }} &rarr;</a>
+        {%- endif %}
+      </div>
+    </section>
+    {%- endif %}
+
     {%- if links %}
     <section id="hello" class="band">
-      <div class="band-label">[04] {{ hello_heading | default('ping()') }}</div>
+      <div class="band-label">[05] {{ hello_heading | default('ping()') }}</div>
       <div class="hello">
         {%- if hello_note %}<p class="say">{{ hello_note }}</p>{% endif %}
         <div class="links">
