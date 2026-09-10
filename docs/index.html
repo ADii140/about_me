@@ -110,11 +110,13 @@
   .brand { display: flex; align-items: center; gap: var(--space-3); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--fg-bright); }
   .brand::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--sweep); }
   .brand i { font-style: normal; color: var(--fg-faint); }
-  .top nav { display: flex; align-items: center; gap: var(--space-6); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; }
+  .top nav { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-6); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; }
+  .top nav .n { font-style: normal; }
   .top nav a:nth-of-type(1) { color: var(--c1); }
   .top nav a:nth-of-type(2) { color: var(--c2); }
   .top nav a:nth-of-type(3) { color: var(--c5); }
-  .top nav a:nth-of-type(4) { color: var(--c7); }
+  .top nav a:nth-of-type(4) { color: var(--c6); }
+  .top nav a:nth-of-type(5) { color: var(--c7); }
   .theme-btn { font: inherit; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); background: var(--sweep); border: 0; padding: 5px 10px; cursor: pointer; }
   .theme-btn:hover { filter: brightness(1.12); }
   .theme-btn .to-dark { display: none; }
@@ -138,6 +140,7 @@
   #me .band-label { background: var(--c1); }
   #likes .band-label { background: var(--c2); }
   #lately .band-label { background: var(--c5); }
+  #medium .band-label { background: var(--c6); }
   #hello .band-label { background: var(--c7); }
 
   .story { display: grid; gap: var(--space-8); max-width: 33em; }
@@ -165,6 +168,24 @@
   .cell:nth-child(4n+4) .cell-label { color: var(--c8-ink); }
   .cell p { margin: 0; font-size: 15px; line-height: 1.65; }
 
+  .posts { display: grid; max-width: 46em; }
+  .post { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: var(--space-4) var(--space-8); padding: var(--space-6) 0; border-top: 2px solid var(--c1); color: var(--fg); }
+  .post:last-child { border-bottom: 2px solid var(--c8); }
+  .post:nth-child(5n+2) { border-top-color: var(--c3); }
+  .post:nth-child(5n+3) { border-top-color: var(--c4); }
+  .post:nth-child(5n+4) { border-top-color: var(--c6); }
+  .post:nth-child(5n+5) { border-top-color: var(--c7); }
+  .post-title { margin: 0; font-family: var(--font-heading); font-weight: 500; font-size: clamp(17px, 1.6vw, 21px); line-height: 1.3; letter-spacing: -0.015em; color: var(--fg-bright); text-wrap: pretty; }
+  .post-blurb { margin: var(--space-3) 0 0; font-size: 14px; line-height: 1.6; color: var(--fg-dim); text-wrap: pretty; }
+  .post-meta { display: flex; gap: var(--space-4); font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-faint); white-space: nowrap; }
+  .post:hover .post-title { color: var(--c1); }
+  .post:nth-child(5n+2):hover .post-title { color: var(--c3); }
+  .post:nth-child(5n+3):hover .post-title { color: var(--c4); }
+  .post:nth-child(5n+4):hover .post-title { color: var(--c6); }
+  .post:nth-child(5n+5):hover .post-title { color: var(--c7); }
+  .posts-all { justify-self: start; margin-top: var(--space-8); font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--c6); }
+  .posts-all:hover { color: var(--fg-bright); }
+
   .hello { max-width: 34em; }
   .say { margin: 0 0 36px; font-size: clamp(19px, 2vw, 24px); line-height: 1.45; letter-spacing: -0.012em; color: var(--fg-bright); text-wrap: pretty; }
   .links { display: grid; font-family: var(--mono); }
@@ -177,11 +198,25 @@
 
   footer { margin-top: 72px; display: flex; justify-content: space-between; gap: var(--space-6); font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; color: var(--fg-faint); }
 
+  @media (max-width: 560px) {
+    .post { grid-template-columns: 1fr; }
+  }
+
+  section { scroll-margin-top: 84px; }
+
   @media (max-width: 760px) {
     .hero, .band { grid-template-columns: 1fr; }
     .band-label { position: static; }
     h1 { font-size: clamp(32px, 10vw, 54px); }
-    .top nav { gap: var(--space-3); }
+    .top nav { gap: 14px; }
+    .top nav .n { display: none; }
+  }
+
+  @media (max-width: 540px) {
+    .top { flex-wrap: wrap; gap: 10px; }
+    .brand { flex: 1 1 auto; }
+    .top nav { order: 3; width: 100%; justify-content: space-between; gap: 6px; font-size: 10px; letter-spacing: 0.1em; }
+    section { scroll-margin-top: 112px; }
   }
 </style>
 </head>
@@ -193,10 +228,10 @@
   <header class="top">
     <span class="brand">adii140<i>.exe</i></span>
     <nav>
-      <a href="#me">[01] whoami</a>
-      <a href="#likes">[02] likes</a>
-      <a href="#lately">[03] uptime</a>
-      <a href="#hello">[04] ping</a>
+      <a href="#me"><i class="n">[01] </i>whoami</a>
+      <a href="#likes"><i class="n">[02] </i>likes</a>
+      <a href="#lately"><i class="n">[03] </i>uptime</a>
+      <a href="#hello"><i class="n">[04] </i>ping</a>
       <button type="button" class="theme-btn" id="theme-toggle" aria-label="Switch theme">
         &lt;<span class="to-light">light</span><span class="to-dark">dark</span>&gt;
       </button>
@@ -251,8 +286,51 @@
         </div>
       </div>
     </section>
+    <section id="medium" class="band">
+      <div class="band-label">[04] medium.feed</div>
+      <div>
+        <div class="posts">
+          <a class="post" href="https://medium.com/@yourhandle/article-one" target="_blank" rel="noopener">
+            <div>
+              <p class="post-title">The article title, as it appears on Medium</p><p class="post-blurb">One line about what the piece argues.</p>
+            </div>
+            <div class="post-meta"><span>2026-08-24</span><span>7 min</span>
+            </div>
+          </a>
+          <a class="post" href="https://medium.com/@yourhandle/article-two" target="_blank" rel="noopener">
+            <div>
+              <p class="post-title">Second article</p><p class="post-blurb">One line about what the piece argues.</p>
+            </div>
+            <div class="post-meta"><span>2026-07-11</span><span>4 min</span>
+            </div>
+          </a>
+          <a class="post" href="https://medium.com/@yourhandle/article-three" target="_blank" rel="noopener">
+            <div>
+              <p class="post-title">Third article</p><p class="post-blurb">One line about what the piece argues.</p>
+            </div>
+            <div class="post-meta"><span>2026-06-02</span><span>11 min</span>
+            </div>
+          </a>
+          <a class="post" href="https://medium.com/@yourhandle/article-four" target="_blank" rel="noopener">
+            <div>
+              <p class="post-title">Fourth article</p><p class="post-blurb">One line about what the piece argues.</p>
+            </div>
+            <div class="post-meta"><span>2026-04-19</span><span>6 min</span>
+            </div>
+          </a>
+          <a class="post" href="https://medium.com/@yourhandle/article-five" target="_blank" rel="noopener">
+            <div>
+              <p class="post-title">Fifth article</p><p class="post-blurb">One line about what the piece argues.</p>
+            </div>
+            <div class="post-meta"><span>2026-03-05</span><span>9 min</span>
+            </div>
+          </a>
+        </div>
+        <a class="posts-all" href="https://medium.com/@yourhandle" target="_blank" rel="noopener">read everything on medium &rarr;</a>
+      </div>
+    </section>
     <section id="hello" class="band">
-      <div class="band-label">[04] ping()</div>
+      <div class="band-label">[05] ping()</div>
       <div class="hello"><p class="say">I like getting email from strangers. If any of this overlapped with something of yours — reliability work, a good novel, or a better game than the one I'm currently playing — tell me about it.</p>
         <div class="links">
           <a href="mailto:adrian@devoops.pl"><span class="k">mail</span><span>adrian@devoops.pl</span></a>
