@@ -14,7 +14,8 @@ nav:
   - { label: "[01] whoami", href: "#me" }
   - { label: "[02] likes", href: "#likes" }
   - { label: "[03] uptime", href: "#lately" }
-  - { label: "[04] ping", href: "#hello" }
+  - { label: "[04] medium", href: "#medium" }
+  - { label: "[05] ping", href: "#hello" }
 
 me:
   name: "Adrian"
