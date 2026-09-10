@@ -9,16 +9,19 @@ logger = logging.getLogger(__name__)
 
 def main():
     """Render templates/about.html with content.yml into docs/ for GitHub Pages."""
-    html = prepare_html(content_file_name="content.yml")
+    html = prepare_html(content_file_names=["content.yml", "articles.yml"])
     logger.info("Prepared HTML from content.yml and templates/about.html")
 
     prepare_docs()
     build_pages(html)
 
-def prepare_html(content_file_name):
+def prepare_html(content_file_names):
     """Render templates/about.html with content.yml into docs/ for GitHub Pages."""
-    with open(content_file_name, "r") as f:
-        content = yaml.safe_load(f)
+    content = {}
+    
+    for content_file_name in content_file_names:
+        with open(content_file_name, "r") as f:
+            content.update(yaml.safe_load(f))
 
     env = Environment(loader=FileSystemLoader("templates"))
     template = env.get_template("about.html")
