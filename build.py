@@ -76,7 +76,6 @@ def build_pages(html):
         f.write(html)
     
     sync_static(filecmp.dircmp("static", "docs/static"))
-    
 
 if __name__ == "__main__":
     main()

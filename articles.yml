@@ -1,33 +1,32 @@
 medium:
-  heading: "medium.feed"
-  note: "Five most recent posts. Newest first — replace with your own."
+  heading: medium.feed
+  note: Five most recent posts. See all on Medium.
   profile:
-    label: "read everything on medium"
-    href: "https://medium.com/@yourhandle"
-  # Keep at most 5 — the section is designed for five rows.
+    label: read everything on medium
+    href: https://medium.com/@a.klosowski23
   articles:
-    - title: "The article title, as it appears on Medium"
-      href: "https://medium.com/@yourhandle/article-one"
-      date: "2026-08-24"
-      read_time: "7 min"
-      blurb: "One line about what the piece argues."
-    - title: "Second article"
-      href: "https://medium.com/@yourhandle/article-two"
-      date: "2026-07-11"
-      read_time: "4 min"
-      blurb: "One line about what the piece argues."
-    - title: "Third article"
-      href: "https://medium.com/@yourhandle/article-three"
-      date: "2026-06-02"
-      read_time: "11 min"
-      blurb: "One line about what the piece argues."
-    - title: "Fourth article"
-      href: "https://medium.com/@yourhandle/article-four"
-      date: "2026-04-19"
-      read_time: "6 min"
-      blurb: "One line about what the piece argues."
-    - title: "Fifth article"
-      href: "https://medium.com/@yourhandle/article-five"
-      date: "2026-03-05"
-      read_time: "9 min"
-      blurb: "One line about what the piece argues."
+  - title: Why DevOps Sometimes Turns Into DevOops?
+    href: https://medium.com/@a.klosowski23/why-devops-sometimes-turns-into-devoops-669f875658de
+    date: '2025-03-26'
+    read_time: 3 min
+    blurb: When was the first time you heard about DevOps? Probably when someone talked about bridging the gap between developers and operations, right?
+  - title: Turning Our Mess into a Agile Success
+    href: https://medium.com/@a.klosowski23/turning-our-mess-into-a-agile-success-a4729957b4f7
+    date: '2025-02-23'
+    read_time: 3 min
+    blurb: From the beginning of my journey in the IT industry, I heard a lot about how Scrum accelerates delivery.
+  - title: HCP Terraform — How to start?
+    href: https://medium.com/@a.klosowski23/hcp-terraform-how-to-start-74c177aebae2
+    date: '2025-02-18'
+    read_time: 6 min
+    blurb: Managing Terraform state files and deployment pipelines efficiently is crucial, especially when using modules.
+  - title: 'Managing New Relic with Terraform: Part III — A Comprehensive Guide'
+    href: https://awstip.com/managing-new-relic-with-terraform-part-iii-a-comprehensive-guide-5bafed7d9c0f
+    date: '2025-01-20'
+    read_time: 11 min
+    blurb: In previous articles (Part I and Part II) I explained how you can use Terraform to deploy New Relic resources.
+  - title: 'Managing New Relic with Terraform: Part II — A Comprehensive Guide'
+    href: https://awstip.com/managing-new-relic-with-terraform-part-ii-a-comprehensive-guide-f7f6f812c4a3
+    date: '2025-01-08'
+    read_time: 7 min
+    blurb: 'In Managing New Relic with Terraform: Part I — A Comprehensive Guide I explained how you can use Terraform to manage New Relic configuration and…'
