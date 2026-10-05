@@ -5,6 +5,11 @@ medium:
     label: read everything on medium
     href: https://medium.com/@a.klosowski23
   articles:
+  - title: The Poisoned Word
+    href: https://medium.com/@a.klosowski23/the-poisoned-word-7bcc36ab61af
+    date: '2026-10-04'
+    read_time: 3 min
+    blurb: Why fixing one typo needed five teams
   - title: Why DevOps Sometimes Turns Into DevOops?
     href: https://medium.com/@a.klosowski23/why-devops-sometimes-turns-into-devoops-669f875658de
     date: '2025-03-26'
@@ -25,8 +30,3 @@ medium:
     date: '2025-01-20'
     read_time: 11 min
     blurb: In previous articles (Part I and Part II) I explained how you can use Terraform to deploy New Relic resources.
-  - title: 'Managing New Relic with Terraform: Part II — A Comprehensive Guide'
-    href: https://awstip.com/managing-new-relic-with-terraform-part-ii-a-comprehensive-guide-f7f6f812c4a3
-    date: '2025-01-08'
-    read_time: 7 min
-    blurb: 'In Managing New Relic with Terraform: Part I — A Comprehensive Guide I explained how you can use Terraform to manage New Relic configuration and…'
